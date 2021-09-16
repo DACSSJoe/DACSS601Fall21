@@ -1,0 +1,40 @@
+---
+title: "Enter the Data"
+description: Let's wrangle!
+author: Joe Davis
+date: 09-15-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+#readxl not part of core tidyverse, remember to load separately
+library(readxl)
+library(tibble)
+library(magrittr)
+```
+### Dearly Beloved, ###
+
+### we are gathered here today to get through this thing called data wrangling. ###
+
+Having spent a lot of time digitizing handwritten data from volunteer canvasses, I'm a little more familiar with messy data than I'd like to be. So in that spirit, and knowing that for every fun data thing I may build in the future I'll be spending twenty hours cleaning up the tables first, I wanted to spend a lot of time trying out some different sheets.
+
+```{r include = TRUE}
+#let's start by getting that spreadsheet of railroad employment by state and county for 2012 assigned to a variable name
+state_county <- readxl::read_xls(path = "enter-the-data_files/StateCounty2012.xls")
+
+#Then let's look at the top couple of rows
+head(state_county)
+
+```
+
+Well, that certainly does not look tidy. We have some extra information above the column headers to clean up, and from looking at the .xls file there are similar issues at the bottom of the data. Dealing with the blank data fields, possibly some filtering and grouping tasks, and what to do with our beloved Canada all look like problems on the menu for today. 
+
+```{r}
+#Limiting the cells we are reading in this time
+state_county <- read_xls (path = "enter-the-data_files/StateCounty2012.xls", skip = 3, n_max = 2991)
+state_county
+```
