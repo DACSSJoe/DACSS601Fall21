@@ -12,30 +12,38 @@ draft: true
 ### Dearly Beloved, ###
 
 ### we are gathered here today to get through this thing called data wrangling. ###
+
+To get started wrangling, let's set up some libraries to make sure we're prepared. 
+
 ```{r setup, include = TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 #readxl not part of core tidyverse, remember to load separately
 library(readxl)
 library(tibble)
+#to start playing around with pipe functions from their vignette perhaps
 library(magrittr)
 ```
 Having spent a lot of time digitizing handwritten data from volunteer canvasses, I'm a little more familiar with messy data than I'd like to be. So in that spirit, and knowing that for every fun data thing I may build in the future I'll be spending twenty hours cleaning up the tables first, I wanted to spend a lot of time trying out some different sheets.
 
 ```{r First Look, }
-#let's start by getting that spreadsheet of railroad employment by state and county for 2012 assigned to a variable name
-state_county <- read_xls(path = "enter-the-data_files/StateCounty2012.xls")
-
-#Then let's look at the top couple of rows
+#let's start by getting that spreadsheet of railroad employment by state and county for 2012 assigned to an object and looking at the top rows
+state_county <- read_excel("enter-the-data_files/StateCounty2012.xls")
 head(state_county)
-
 ```
 
 Well, that certainly does not look tidy. We have some extra information above the column headers to clean up, and from looking at the .xls file there are similar issues at the bottom of the data. Dealing with the blank data fields, possibly some filtering and grouping tasks, and what to do with our beloved Canada all look like problems on the menu for today. 
 
-```{r Trimming the Rows,}
+First, I'm going to try piping the `state_county` object through some of the filter, range and select functions to see how far I can go that route. For this attempt, I'm just going to politely ignore Canada, employees lacking address information, and the military designation by just trimming them out and pretending they were never there.
+
+```{r Trimming the Rows and Columns}
 #Limiting the cells we are reading in this time, getting rid of the blank columns, and parentheses to add print to screen
-(state_county <- read_xls(path = "enter-the-data_files/StateCounty2012.xls", range = cell_rows(3:2991)))
+(state_county_table <- state_county %>%
+#skipping the rows with meta data that we don't need, piping forward  
+  
+#selecting the columns with data
+  select(c("STATE","COUNTY","TOTAL")))
+
 
 ```
 
