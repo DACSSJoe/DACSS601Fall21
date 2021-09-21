@@ -1481,8 +1481,27 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-article">
 <h3 id="dearly-beloved">Dearly Beloved,</h3>
 <h3 id="we-are-gathered-here-today-to-get-through-this-thing-called-data-wrangling.">we are gathered here today to get through this thing called data wrangling.</h3>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>echo <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='co'>#readxl not part of core tidyverse, remember to load separately</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readxl.tidyverse.org'>readxl</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tibble.tidyverse.org/'>tibble</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://magrittr.tidyverse.org'>magrittr</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
 <p>Having spent a lot of time digitizing handwritten data from volunteer canvasses, I’m a little more familiar with messy data than I’d like to be. So in that spirit, and knowing that for every fun data thing I may build in the future I’ll be spending twenty hours cleaning up the tables first, I wanted to spend a lot of time trying out some different sheets.</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#let's start by getting that spreadsheet of railroad employment by state and county for 2012 assigned to a variable name</span>
+<span class='va'>state_county</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_xls</a></span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"enter-the-data_files/StateCounty2012.xls"</span><span class='op'>)</span>
+
+<span class='co'>#Then let's look at the top couple of rows</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>state_county</span><span class='op'>)</span>
+</code></pre>
+</div>
 <pre><code># A tibble: 6 × 6
   `TOTAL RAILROAD EMPLOYMENT BY STA… ...2    ...3  ...4    ...5  ...6 
   &lt;chr&gt;                              &lt;chr&gt;   &lt;lgl&gt; &lt;chr&gt;   &lt;lgl&gt; &lt;chr&gt;
@@ -1495,20 +1514,29 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>Well, that certainly does not look tidy. We have some extra information above the column headers to clean up, and from looking at the .xls file there are similar issues at the bottom of the data. Dealing with the blank data fields, possibly some filtering and grouping tasks, and what to do with our beloved Canada all look like problems on the menu for today.</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre><code># A tibble: 2,990 × 5
-   STATE     ...2  COUNTY               ...4  TOTAL
-   &lt;chr&gt;     &lt;lgl&gt; &lt;chr&gt;                &lt;lgl&gt; &lt;dbl&gt;
- 1 AE        NA    APO                  NA        2
- 2 AE Total1 NA    &lt;NA&gt;                 NA        2
- 3 AK        NA    ANCHORAGE            NA        7
- 4 AK        NA    FAIRBANKS NORTH STAR NA        2
- 5 AK        NA    JUNEAU               NA        3
- 6 AK        NA    MATANUSKA-SUSITNA    NA        2
- 7 AK        NA    SITKA                NA        1
- 8 AK        NA    SKAGWAY MUNICIPALITY NA       88
- 9 AK Total  NA    &lt;NA&gt;                 NA      103
-10 AL        NA    AUTAUGA              NA      102
-# … with 2,980 more rows</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#Limiting the cells we are reading in this time, getting rid of the blank columns, and parentheses to add print to screen</span>
+<span class='op'>(</span><span class='va'>state_county</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_xls</a></span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"enter-the-data_files/StateCounty2012.xls"</span>, range <span class='op'>=</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/cell-specification.html'>cell_rows</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>2991</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 2,988 × 5
+   ...1      ...2  ...3                 ...4  ...5 
+   &lt;chr&gt;     &lt;lgl&gt; &lt;chr&gt;                &lt;lgl&gt; &lt;chr&gt;
+ 1 STATE     NA    COUNTY               NA    TOTAL
+ 2 AE        NA    APO                  NA    2    
+ 3 AE Total1 NA    &lt;NA&gt;                 NA    2    
+ 4 AK        NA    ANCHORAGE            NA    7    
+ 5 AK        NA    FAIRBANKS NORTH STAR NA    2    
+ 6 AK        NA    JUNEAU               NA    3    
+ 7 AK        NA    MATANUSKA-SUSITNA    NA    2    
+ 8 AK        NA    SITKA                NA    1    
+ 9 AK        NA    SKAGWAY MUNICIPALITY NA    88   
+10 AK Total  NA    &lt;NA&gt;                 NA    103  
+# … with 2,978 more rows</code></pre>
+</div>
+<p>Step one for me was getting rid of the extra meta data on top plus some of the extra info at the bottom that I will deal with in a bit. Now I can get a better look at which columns needed to go to get the initial tibble rectangle set.</p>
+<div class="layout-chunk" data-layout="l-body">
+
 </div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
