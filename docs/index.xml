@@ -12,7 +12,37 @@
       <link>https://mrolfe.github.io/DACSS601Fall21/</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 16 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 26 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>HW1</title>
+      <dc:creator>Justin Flattery</dc:creator>
+      <link>https://mrolfe.github.io/DACSS601Fall21/posts/2021-09-26-hw2-justin</link>
+      <description>Reading in blogpost data</description>
+      <guid>https://mrolfe.github.io/DACSS601Fall21/posts/2021-09-26-hw2-justin</guid>
+      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>[HW3 Data Wrangling]</title>
+      <link>https://mrolfe.github.io/DACSS601Fall21/posts/2021-09-26-insert-post-title</link>
+      <description>In this distill blog post I will be reading in the eggs data and perforrming basic data wrangling operations using dplyr functions.</description>
+      <guid>https://mrolfe.github.io/DACSS601Fall21/posts/2021-09-26-insert-post-title</guid>
+      <pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Homework 3</title>
+      <dc:creator>Molly Hackbarth</dc:creator>
+      <link>https://mrolfe.github.io/DACSS601Fall21/posts/2021-09-23-homework-3-molly-hackbarth</link>
+      <description>Working with Australian Marriages Laws.</description>
+      <guid>https://mrolfe.github.io/DACSS601Fall21/posts/2021-09-23-homework-3-molly-hackbarth</guid>
+      <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Tyler Paske HW#2</title>
+      <link>https://mrolfe.github.io/DACSS601Fall21/posts/2021-09-18-insert-post-title</link>
+      <description>My attempt to post reading in eggs data</description>
+      <guid>https://mrolfe.github.io/DACSS601Fall21/posts/2021-09-18-insert-post-title</guid>
+      <pubDate>Sat, 18 Sep 2021 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>HW#2 - Getting familiar with the US public schools data set</title>
       <dc:creator>Brittany Kenison</dc:creator>
@@ -54,7 +84,6 @@
       <category>-homework 1 -Joe Davis</category>
       <guid>https://mrolfe.github.io/DACSS601Fall21/posts/2021-09-15-lets-try-a-blog-shall-we</guid>
       <pubDate>Tue, 14 Sep 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://mrolfe.github.io/DACSS601Fall21/posts/2021-09-15-lets-try-a-blog-shall-we/lets-try-a-blog-shall-we_files/figure-html5/some basic graphs of that data-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
     <item>
       <title>Welcome to DACSS 601</title>
